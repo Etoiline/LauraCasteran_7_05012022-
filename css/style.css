@@ -1,8 +1,14 @@
-header {
-  width:100%;
+body{
+  background-color: aquamarine;
+  width:100vw;
+  margin : 40px;
 }
 
 .logo{
   margin-left:50%;
   margin-right:50%;
+}
+
+.btn-general{
+  margin-top: 20px;
 }
