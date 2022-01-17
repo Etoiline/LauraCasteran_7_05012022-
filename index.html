@@ -1,51 +1,73 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <script src="https://kit.fontawesome.com/706f764c79.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
     <title>Les Petits Plats</title>
   </head>
   <body>
-    <header>
+    <header class='d-flex justify-content-center'>
       <img src="logo.png" class="logo" alt="Les Petits Plats Home Page"/>
     </header>
     <main id="main">
-        <div class="recherche">
-          <form class="form_recherche">
-            <input type="text" value="Rechercher un ingrédient, appareil, ustensile ou une recette" onfocus="javascript:value=''" onblur="if(this.value=='')this.value='Rechercher un ingrédient, appareil, ustensile ou une recette'" >
-            <button type="button" onclick="">
-                <span class="loupe"><i class="fas fa-search"></i></span>
-            </button>
-          </form>
+        <div class="search">
+          <div class="input-group mb-3">
+            <input id='search' type="text" value="Rechercher un ingrédient, appareil, ustensile ou une recette" onfocus="javascript:value=''" onblur="if(this.value=='')this.value='Rechercher un ingrédient, appareil, ustensile ou une recette'" class="form-control" aria-label="Amount (to the nearest dollar)">
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="fas fa-search"></i></span>
+            </div>
+          </div>
+          <div class='filters d-flex'>
+            
+          </div>
           <div class = 'btn-general'>
-            <div class="btn-group">
+            <div class="btn-group ingredient-search">
               <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 Ingrédients
               </button>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu ingredient-search__dropdown-menu">
+                <li>
+                  <div class="input-group mb-3">
+                    <input class='search ingredient-search__input' type="text" value="Rechercher un ingrédient" onfocus="javascript:value=''" onblur="if(this.value=='')this.value='Rechercher un ingrédient'" class="form-control">
+                  </div>
+                </li>
                 <li><a class="dropdown-item" href="#">1</a></li>
                 <li><a class="dropdown-item" href="#">2</a></li>
                 <li><a class="dropdown-item" href="#">3</a></li>
               </ul>
             </div>
-            <div class="btn-group">
+
+
+
+            <div class="btn-group appliance-search">
               <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 Appareil
               </button>
               <ul class="dropdown-menu">
+                <li>
+                  <div class="input-group mb-3">
+                    <input class='search appliance-search__input' type="text" value="Rechercher un appareil" onfocus="javascript:value=''" onblur="if(this.value=='')this.value='Rechercher un appareil'" class="form-control">
+                  </div>
+                </li>
                 <li><a class="dropdown-item" href="#">1</a></li>
                 <li><a class="dropdown-item" href="#">2</a></li>
                 <li><a class="dropdown-item" href="#">3</a></li>
               </ul>
             </div>
-            <div class="btn-group">
+            <div class="btn-group ustensil-search">
               <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 Ustensiles
               </button>
               <ul class="dropdown-menu">
+                <li>
+                  <div class="input-group mb-3">
+                    <input class='search ustensil-search__input' type="text" value="Rechercher un ustensile" onfocus="javascript:value=''" onblur="if(this.value=='')this.value='Rechercher un ustensile'" class="form-control">
+                  </div>
+                </li>
                 <li><a class="dropdown-item" href="#">1</a></li>
                 <li><a class="dropdown-item" href="#">2</a></li>
                 <li><a class="dropdown-item" href="#">3</a></li>
@@ -55,12 +77,13 @@
             
          
         </div>
-        <div class='recettes'></div>
+        <div class='recipes d-flex justify-content-between flex-wrap'></div>
     </main>
     
   </body>
   <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script type="module" src='js/index.js'></script>
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

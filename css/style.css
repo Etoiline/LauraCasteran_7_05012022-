@@ -1,14 +1,140 @@
 body{
-  background-color: aquamarine;
-  width:100vw;
-  margin : 40px;
+  width:100%;
 }
 
 .logo{
-  margin-left:50%;
-  margin-right:50%;
+  margin-top: 20px;
+}
+
+#main {
+  margin:30px;
+}
+
+#search {
+  background-color: #e6e6e6;
 }
 
 .btn-general{
   margin-top: 20px;
+}
+
+.btn-general ul {
+  color:white;
+  transform: none;
+}
+
+.ingredient-search__dropdown-menu{
+  transform: none;
+}
+
+.btn-general li {
+  margin:4px;
+}
+
+.btn-general input {
+  color:white;
+}
+
+.recipes {
+  margin-top: 40px;
+}
+
+.figure{
+  width:32%;
+  height :500px;
+  background-color: #e6e6e6;
+  border-radius: 8px;
+}
+
+.figure > img{
+  background-color:#c7bebe;
+  object-fit: cover;
+  height:50%;
+  width:100%;
+  border-radius: 8px 8px 0 0;
+}
+
+.figure-figcaption {
+  height:49%;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.title {
+  margin:0;
+  align-self: center;
+  font-size: 1.4rem;
+  width:80%;
+}
+
+.title-name {
+  margin-bottom: 10px;
+}
+
+.nbTime{
+  margin:0;
+  align-self: center;  
+  margin-left: 5px;
+
+}
+
+.time {
+  align-items: center;
+  font-weight:600;
+  width: 82px;
+}
+
+.description {
+  line-height: 1.2;
+  overflow: hidden;
+  height: 156px;
+  display:-webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
+  width:50%;
+}
+
+.ingredients {
+  width:50%;
+  margin-right: 2%;
+}
+
+.nameIngredient {
+  margin: 0;
+  font-weight: 600;
+}
+
+.quantity {
+  margin: 0;
+  font-weight: normal;
+}
+
+.recette{
+  place-content: space-between;
+}
+
+.ingredient-search ul {
+  background-color: #007bff;
+}
+
+.appliance-search ul {
+  background-color:#28a745;
+}
+
+.ustensil-search ul {
+  background-color: #dc3545;
+}
+
+input.search, textarea {
+  border:none;
+  background-color : transparent; 
+
+}
+
+input.search:hover, textarea {
+  border:none;
+}
+
+input[type='text'] {
+  border:none;
 }
