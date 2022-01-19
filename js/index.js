@@ -1,28 +1,36 @@
-import { recipes } from "../data/recipes.js"
-import Recipe from "./factory/recipe.js"
+import { recipes } from '../data/recipes.js'
+import Recipe from './factory/recipe.js'
 
-import Ingredients from "./factory/ingredient.js"
-import Appliance from "./factory/appliance.js"
-import Ustensil from "./factory/ustensil.js"
+import Ingredients from './factory/ingredient.js'
+import Appliance from './factory/appliance.js'
+import Ustensil from './factory/ustensil.js'
 
-import * as ingredientComponent from "./component/ingredient-search.js"
+import * as ingredientComponent from './component/ingredient-search.js'
 
 console.table(recipes)
 
-let divRecipes = document.getElementsByClassName('recipes')[0]
+const divRecipes = document.getElementsByClassName('recipes')[0]
 
 recipes.forEach((item, index) => {
-  let recipeObject = new Recipe(item)
+  const recipeObject = new Recipe(item)
   divRecipes.appendChild(recipeObject.recipeFactory())
 })
 
 // initialisation des dropdowns
-export let ingredientsClass = new Ingredients()
-export let applianceClass = new Appliance()
-export let ustensilsClass = new Ustensil()
+export const ingredientsClass = new Ingredients()
+export const applianceClass = new Appliance()
+export const ustensilsClass = new Ustensil()
 
 // console.log('current', ingredientsClass.currentIngredients, ingredientsClass.allIngredients)
 // ingredientsClass.currentIngredients.clear()
 // console.log('current', ingredientsClass.currentIngredients, ingredientsClass.allIngredients)
+
+const dropdownIngredients = document.getElementsByClassName('ingredient-search')[0]
+dropdownIngredients.addEventListener('show.bs.dropdown', function () {
+  dropdownIngredients.setAttribute('class', 'btn-group ingredient-search ingredient-search-onclick')
+})
+dropdownIngredients.addEventListener('hide.bs.dropdown', function () {
+  dropdownIngredients.setAttribute('class', 'btn-group ingredient-search')
+})
 
 ingredientComponent.listener()

@@ -16,6 +16,7 @@ body{
 
 .btn-general{
   margin-top: 20px;
+  display: flex;
 }
 
 .btn-general ul {
@@ -23,8 +24,16 @@ body{
   transform: none;
 }
 
-.ingredient-search__dropdown-menu{
-  transform: none;
+.btn-group {
+  margin-right : 10px;
+}
+
+.dropdown-menu{
+  transform: none !important;
+}
+
+.ingredient-search-onclick {
+  width:600px;
 }
 
 .btn-general li {
@@ -115,10 +124,25 @@ body{
 
 .ingredient-search ul {
   background-color: #007bff;
+  width:100%;
+
+}
+
+.ingredient-item-search {
+  width:100%;
+}
+
+.ingredient-item {
+  width:30%;
 }
 
 .appliance-search ul {
   background-color:#28a745;
+}
+
+.ingredient-search-onclick > ul {
+  display: flex !important;
+  flex-wrap: wrap;
 }
 
 .ustensil-search ul {
@@ -137,4 +161,10 @@ input.search:hover, textarea {
 
 input[type='text'] {
   border:none;
+}
+
+.btn-close-perso {
+  border: 3px solid black ;
+  border-radius: 50%;
+  font-size: 0.7rem;
 }

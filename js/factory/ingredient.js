@@ -1,4 +1,12 @@
-import { recipes } from "../../data/recipes.js";
+import { recipes } from '../../data/recipes.js'
+import * as ingredientSearch from '../component/ingredient-search.js'
+/*
+* La classe ingrédients contient deux sets :
+* allIngredients : contient l'ensemble des ingrédients récupérés dans toutes les recettes
+*                  cette variable sert à initialiser l'affichage et ne sera jamais modifiée
+* currentIngredients : contient les ingredients en tenant en compte les filtres choisis
+*                   cette variable évoluera selon les recherches de l'utilisateur
+*/
 
 export default class Ingredients {
   constructor () {
@@ -6,36 +14,65 @@ export default class Ingredients {
     this.currentIngredients = new Set()
     this.queryIngredients()
     this.initCurrentIngredients()
-    this.showIngredients()
+    this.initShowIngredients()
   }
 
-  queryIngredients() {
-    recipes.forEach(recipe => { 
+  /*
+  * récupère et formatte la liste des ingrédients
+  */
+  queryIngredients () {
+    recipes.forEach(recipe => {
       recipe.ingredients.forEach(ingredient => {
-        let oneIngredient = ingredient.ingredient
+        const oneIngredient = ingredient.ingredient
         this.allIngredients.add(oneIngredient[0].toUpperCase() + oneIngredient.substring(1).toLowerCase())
       })
     })
+    this.allIngredients = Array.from(this.allIngredients).sort()
   }
 
-  initCurrentIngredients() {
-    this.allIngredients.forEach(ingredient => { 
-        this.currentIngredients.add(ingredient)
-      })
+  /*
+  * initialise la liste currentIngredients à la même valeur que allIngredients
+  * c'est au premier affichage de la page, aucune recherche n'a encore été effectuée
+  */
+  initCurrentIngredients () {
+    this.allIngredients.forEach(ingredient => {
+      this.currentIngredients.add(ingredient)
+    })
   }
 
-  showIngredients(){
-    let divIngredientSearch = document.getElementsByClassName('ingredient-search')[0]
-    let ulIngredientSearch = divIngredientSearch.getElementsByTagName('ul')[0]
-    let liIngredientSearch = ulIngredientSearch.firstElementChild
-    ulIngredientSearch.innerHTML=''
+  /*
+  * initialise l'affichage des ingrédients dans le dropdown
+  */
+  initShowIngredients () {
+    const divIngredientSearch = document.getElementsByClassName('ingredient-search')[0]
+    const ulIngredientSearch = divIngredientSearch.getElementsByTagName('ul')[0]
+    const liIngredientSearch = ulIngredientSearch.firstElementChild
+    ulIngredientSearch.innerHTML = ''
     ulIngredientSearch.appendChild(liIngredientSearch)
     this.currentIngredients.forEach(ingredient => {
-      let liIngredient = document.createElement('li')
+      const liIngredient = document.createElement('li')
+      liIngredient.setAttribute('class', 'ingredient-item')
       liIngredient.textContent = ingredient
       ulIngredientSearch.appendChild(liIngredient)
     })
   }
 
-
+  showIngredients () {
+    // console.log('mise à jour ingredients')
+    // effacer le contenu pour le remplacer
+    const ingredientItemToDelete = document.querySelectorAll('li.ingredient-item')
+    ingredientItemToDelete.forEach(ingredientDelete => {
+      ingredientDelete.remove()
+    })
+    // console.log('querydelete', ingredientItemToDelete)
+    const divIngredientSearch = document.getElementsByClassName('ingredient-search')[0]
+    const ulIngredientSearch = divIngredientSearch.getElementsByTagName('ul')[0]
+    this.currentIngredients.forEach(ingredient => {
+      const liIngredient = document.createElement('li')
+      liIngredient.setAttribute('class', 'ingredient-item')
+      liIngredient.textContent = ingredient
+      ulIngredientSearch.appendChild(liIngredient)
+    })
+    ingredientSearch.listener()
+  }
 }
