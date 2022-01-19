@@ -21,7 +21,7 @@ export default class Recipe {
     figure.setAttribute('class', 'figure')
     const figcaption = document.createElement('figcaption')
     figcaption.setAttribute('class', 'figure-figcaption')
-    img.setAttribute('src', '../data/toque.png')
+    img.setAttribute('src', './data/toque.png')
     img.setAttribute('class', 'figure-img')
     img.setAttribute('alt', 'photo recette')
     const divTitleName = document.createElement('div')
