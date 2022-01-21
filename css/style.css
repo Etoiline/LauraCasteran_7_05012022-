@@ -163,8 +163,38 @@ input[type='text'] {
   border:none;
 }
 
-.btn-close-perso {
-  border: 3px solid black ;
+/* #btn-close-perso {
+  border: 2px solid white ;
   border-radius: 50%;
   font-size: 0.7rem;
+  color: white;
+  opacity:100;
+  margin-right: 15px;
+} */
+
+.btn-close-perso {
+  color:white;
+  border:2px solid white;
+  border-radius:50%;
+  margin-right: 15px;
+  padding:3px;
+  font-size: small;
+  width:20px;
+  height:20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-tags__ingredients > span{
+  background-color:#007bff;
+  align-items : center;
+  margin:5px;
+  border-radius: 6px;
+}
+
+.search-tags__ingredients p {
+  margin:5px;
+  color:white;
+  margin-left:15px;
 }

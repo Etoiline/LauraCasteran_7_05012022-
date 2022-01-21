@@ -57,17 +57,17 @@ export default class Ingredients {
     })
   }
 
-  showIngredients () {
-    // console.log('mise à jour ingredients')
+  showIngredients (ingredientList = this.currentIngredients) {
+    console.log('mise à jour ingredients')
     // effacer le contenu pour le remplacer
     const ingredientItemToDelete = document.querySelectorAll('li.ingredient-item')
     ingredientItemToDelete.forEach(ingredientDelete => {
       ingredientDelete.remove()
     })
-    // console.log('querydelete', ingredientItemToDelete)
+    console.log('querydelete', ingredientItemToDelete)
     const divIngredientSearch = document.getElementsByClassName('ingredient-search')[0]
     const ulIngredientSearch = divIngredientSearch.getElementsByTagName('ul')[0]
-    this.currentIngredients.forEach(ingredient => {
+    ingredientList.forEach(ingredient => {
       const liIngredient = document.createElement('li')
       liIngredient.setAttribute('class', 'ingredient-item')
       liIngredient.textContent = ingredient

@@ -28,9 +28,13 @@ export const ustensilsClass = new Ustensil()
 const dropdownIngredients = document.getElementsByClassName('ingredient-search')[0]
 dropdownIngredients.addEventListener('show.bs.dropdown', function () {
   dropdownIngredients.setAttribute('class', 'btn-group ingredient-search ingredient-search-onclick')
+  ingredientsClass.showIngredients()
 })
 dropdownIngredients.addEventListener('hide.bs.dropdown', function () {
   dropdownIngredients.setAttribute('class', 'btn-group ingredient-search')
+  const searchInput = document.getElementsByClassName('ingredient-search__input')[0]
+  searchInput.value = 'Rechercher un ingrédient'
+  console.log('fermer dropdown ingredient')
 })
 
 ingredientComponent.listener()

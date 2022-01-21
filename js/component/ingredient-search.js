@@ -16,10 +16,13 @@ export function selectIngredient () {
       const pTag = document.createElement('p')
       pTag.textContent = ingredientsItem.textContent
       spanTag.appendChild(pTag)
-      const buttonTag = document.createElement('button')
-      buttonTag.setAttribute('type', 'button')
-      buttonTag.setAttribute('class', 'btn-close btn-close-perso')
-      buttonTag.setAttribute('aria-label', 'Close')
+      // const buttonTag = document.createElement('button')
+      // buttonTag.setAttribute('type', 'button')
+      // buttonTag.setAttribute('class', 'btn-close')
+      // buttonTag.setAttribute('id', 'btn-close-perso')
+      // buttonTag.setAttribute('aria-label', 'Close')
+      const buttonTag = document.createElement('i')
+      buttonTag.setAttribute('class', 'fas fa-times btn-close-perso')
       spanTag.appendChild(buttonTag)
       divSelectedTag.appendChild(spanTag)
       console.log('current', ingredientsClass.currentIngredients, ingredientsItem)
@@ -38,33 +41,36 @@ export function selectIngredient () {
 export function listener () {
   const searchInput = document.getElementsByClassName('ingredient-search__input')[0]
   // console.log('search input', searchInput)
+  const ingredientSearch = new Set()
   searchInput.addEventListener('input', () => {
-    ingredientsClass.currentIngredients.clear()
+    ingredientSearch.clear()
     const ingredientsItems = document.querySelectorAll('li.ingredient-item')
     ingredientsItems.forEach(ingredientItem => ingredientItem.remove())
     ingredientsClass.allIngredients.forEach(ingredient => {
       if (ingredient.toLowerCase().match(searchInput.value.toLowerCase())) {
-        ingredientsClass.currentIngredients.add(ingredient)
+        // ingredientsClass.currentIngredients.add(ingredient)
+        ingredientSearch.add(ingredient)
       }
     })
-    ingredientsClass.showIngredients()
+    ingredientsClass.showIngredients(ingredientSearch)
     // console.log('tab', ingredientsClass.currentIngredients)
   })
   selectIngredient()
 }
 
 export function closeBtn () {
-  const closeButtons = document.querySelectorAll('.btn-close')
+  const closeButtons = document.querySelectorAll('.btn-close-perso')
   // console.log('ok', closeButtons)
   closeButtons.forEach(closeButton => {
     closeButton.addEventListener('click', () => {
       // supprimer l'élément de la liste des filtres
       // et le rajouter dans la liste des tags
-      console.log('close', closeButton.parentNode.firstChild.textContent)
-      console.log('close2', ingredientsClass.currentIngredients)
+      // console.log('close', closeButton.parentNode.firstChild.textContent)
+      // console.log('close2', ingredientsClass.currentIngredients)
       ingredientsClass.currentIngredients.add(closeButton.parentNode.firstChild.textContent)
-      ingredientsClass.currentIngredients = Array.from(ingredientsClass.currentIngredients).sort()
+      ingredientsClass.currentIngredients = new Set(Array.from(ingredientsClass.currentIngredients).sort())
       ingredientsClass.showIngredients()
+      console.log('parent', closeButton.parentNode.parentNode, 'child', closeButton.parentNode)
       closeButton.parentNode.parentNode.removeChild(closeButton.parentNode)
     })
   })
