@@ -5,8 +5,6 @@ import Ingredients from './factory/ingredient.js'
 import Appliance from './factory/appliance.js'
 import Ustensil from './factory/ustensil.js'
 
-import * as ingredientComponent from './component/ingredient-search.js'
-
 console.table(recipes)
 
 const divRecipes = document.getElementsByClassName('recipes')[0]
@@ -37,4 +35,4 @@ dropdownIngredients.addEventListener('hide.bs.dropdown', function () {
   console.log('fermer dropdown ingredient')
 })
 
-ingredientComponent.listener()
+// ingredientComponent.listener()

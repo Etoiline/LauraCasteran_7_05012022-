@@ -6,6 +6,7 @@ import { ingredientsClass } from '../index.js'
 * le supprimer de la liste des tags (on ne peut pas sélectionner deux fois le même)
 */
 export function selectIngredient () {
+  console.log('select ingr')
   const ingredientsItems = document.querySelectorAll('li.ingredient-item')
   const divSelectedTag = document.getElementsByClassName('search-tags__ingredients')[0]
   ingredientsItems.forEach(ingredientsItem => {
@@ -34,6 +35,7 @@ export function selectIngredient () {
   })
 }
 
+let cpt = 0
 /*
 * permet à l'utilisateur de rechercher un ingrédient
 * met à jour la liste à chaque caractère tapé
@@ -43,10 +45,12 @@ export function listener () {
   // console.log('search input', searchInput)
   const ingredientSearch = new Set()
   searchInput.addEventListener('input', () => {
+    cpt += 1
+    console.log('listener', cpt)
     ingredientSearch.clear()
     const ingredientsItems = document.querySelectorAll('li.ingredient-item')
     ingredientsItems.forEach(ingredientItem => ingredientItem.remove())
-    ingredientsClass.allIngredients.forEach(ingredient => {
+    ingredientsClass.currentIngredients.forEach(ingredient => {
       if (ingredient.toLowerCase().match(searchInput.value.toLowerCase())) {
         // ingredientsClass.currentIngredients.add(ingredient)
         ingredientSearch.add(ingredient)
@@ -54,8 +58,9 @@ export function listener () {
     })
     ingredientsClass.showIngredients(ingredientSearch)
     // console.log('tab', ingredientsClass.currentIngredients)
+    selectIngredient()
   })
-  selectIngredient()
+  //  selectIngredient()
 }
 
 export function closeBtn () {

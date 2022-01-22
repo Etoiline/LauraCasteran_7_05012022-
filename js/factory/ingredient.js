@@ -55,16 +55,16 @@ export default class Ingredients {
       liIngredient.textContent = ingredient
       ulIngredientSearch.appendChild(liIngredient)
     })
+    ingredientSearch.listener()
   }
 
   showIngredients (ingredientList = this.currentIngredients) {
-    console.log('mise à jour ingredients')
     // effacer le contenu pour le remplacer
     const ingredientItemToDelete = document.querySelectorAll('li.ingredient-item')
     ingredientItemToDelete.forEach(ingredientDelete => {
       ingredientDelete.remove()
     })
-    console.log('querydelete', ingredientItemToDelete)
+    // console.log('querydelete', ingredientItemToDelete)
     const divIngredientSearch = document.getElementsByClassName('ingredient-search')[0]
     const ulIngredientSearch = divIngredientSearch.getElementsByTagName('ul')[0]
     ingredientList.forEach(ingredient => {
@@ -73,6 +73,6 @@ export default class Ingredients {
       liIngredient.textContent = ingredient
       ulIngredientSearch.appendChild(liIngredient)
     })
-    ingredientSearch.listener()
+    ingredientSearch.selectIngredient()
   }
 }
