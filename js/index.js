@@ -4,13 +4,16 @@ import Recipe from './factory/recipe.js'
 import Ingredients from './factory/ingredient.js'
 import Appliance from './factory/appliance.js'
 import Ustensil from './factory/ustensil.js'
+import { selectRecipeWithFilterIngredient } from './component/recipeFilter.js'
 
 console.table(recipes)
 
+export const recipesArray = []
 const divRecipes = document.getElementsByClassName('recipes')[0]
 
 recipes.forEach((item, index) => {
   const recipeObject = new Recipe(item)
+  recipesArray.push(recipeObject)
   divRecipes.appendChild(recipeObject.recipeFactory())
 })
 
@@ -36,3 +39,6 @@ dropdownIngredients.addEventListener('hide.bs.dropdown', function () {
 })
 
 // ingredientComponent.listener()
+
+const recipesToDisplay = selectRecipeWithFilterIngredient()
+console.log('recipe to display', recipesToDisplay)

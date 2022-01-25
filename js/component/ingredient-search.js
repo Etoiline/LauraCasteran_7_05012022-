@@ -1,4 +1,5 @@
 import { ingredientsClass } from '../index.js'
+import { selectRecipeWithFilterIngredient } from './recipeFilter.js'
 
 /*
 * cliquer sur un ingrédient dans la liste afin de le sélectionner
@@ -6,12 +7,13 @@ import { ingredientsClass } from '../index.js'
 * le supprimer de la liste des tags (on ne peut pas sélectionner deux fois le même)
 */
 export function selectIngredient () {
-  console.log('select ingr')
+  // console.log('select ingr')
   const ingredientsItems = document.querySelectorAll('li.ingredient-item')
   const divSelectedTag = document.getElementsByClassName('search-tags__ingredients')[0]
   ingredientsItems.forEach(ingredientsItem => {
     ingredientsItem.addEventListener('click', () => {
-      console.log('clic tag ingredients', ingredientsItem)
+      // console.log('clic tag ingredients', ingredientsItem)
+      ingredientsClass.selectedIngredients.add(ingredientsItem.textContent)
       const spanTag = document.createElement('span')
       spanTag.setAttribute('class', 'd-flex')
       const pTag = document.createElement('p')
@@ -24,13 +26,15 @@ export function selectIngredient () {
       // buttonTag.setAttribute('aria-label', 'Close')
       const buttonTag = document.createElement('i')
       buttonTag.setAttribute('class', 'fas fa-times btn-close-perso')
+      buttonTag.addEventListener('click', closeEvent)
       spanTag.appendChild(buttonTag)
       divSelectedTag.appendChild(spanTag)
-      console.log('current', ingredientsClass.currentIngredients, ingredientsItem)
+      // console.log('current', ingredientsClass.currentIngredients, ingredientsItem)
       ingredientsClass.currentIngredients.delete(ingredientsItem.textContent)
-      console.log('liste', ingredientsClass.currentIngredients)
+      // console.log('liste', ingredientsClass.currentIngredients)
       ingredientsClass.showIngredients()
-      closeBtn()
+      // closeBtn()
+      selectRecipeWithFilterIngredient()
     })
   })
 }
@@ -58,25 +62,30 @@ export function listener () {
     })
     ingredientsClass.showIngredients(ingredientSearch)
     // console.log('tab', ingredientsClass.currentIngredients)
-    selectIngredient()
+    // selectIngredient()
   })
   //  selectIngredient()
 }
 
-export function closeBtn () {
-  const closeButtons = document.querySelectorAll('.btn-close-perso')
-  // console.log('ok', closeButtons)
-  closeButtons.forEach(closeButton => {
-    closeButton.addEventListener('click', () => {
-      // supprimer l'élément de la liste des filtres
-      // et le rajouter dans la liste des tags
-      // console.log('close', closeButton.parentNode.firstChild.textContent)
-      // console.log('close2', ingredientsClass.currentIngredients)
-      ingredientsClass.currentIngredients.add(closeButton.parentNode.firstChild.textContent)
-      ingredientsClass.currentIngredients = new Set(Array.from(ingredientsClass.currentIngredients).sort())
-      ingredientsClass.showIngredients()
-      console.log('parent', closeButton.parentNode.parentNode, 'child', closeButton.parentNode)
-      closeButton.parentNode.parentNode.removeChild(closeButton.parentNode)
-    })
-  })
+// export function closeBtn () {
+//   const closeButtons = document.querySelectorAll('.btn-close-perso')
+//   // console.log('ok', closeButtons)
+//   closeButtons.forEach(closeButton => {
+//     closeButton.addEventListener('click', () => {
+
+//     })
+//   })
+// }
+
+function closeEvent (event) {
+// supprimer l'élément de la liste des filtres et des éléments sélectionnés
+  // et le rajouter dans la liste des tags
+  const closeButton = event.target
+  ingredientsClass.currentIngredients.add(closeButton.parentNode.firstChild.textContent)
+  ingredientsClass.currentIngredients = new Set(Array.from(ingredientsClass.currentIngredients).sort())
+  ingredientsClass.showIngredients()
+  // console.log('tab', ingredientsClass.selectedIngredients)
+  ingredientsClass.selectedIngredients.delete(closeButton.parentNode.firstChild.textContent)
+  // console.log('parent', closeButton.parentNode.parentNode, 'child', closeButton.parentNode)
+  closeButton.parentNode.parentNode.removeChild(closeButton.parentNode)
 }

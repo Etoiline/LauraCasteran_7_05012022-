@@ -12,6 +12,7 @@ export default class Ingredients {
   constructor () {
     this.allIngredients = new Set()
     this.currentIngredients = new Set()
+    this.selectedIngredients = new Set()
     this.queryIngredients()
     this.initCurrentIngredients()
     this.initShowIngredients()

@@ -163,14 +163,10 @@ input[type='text'] {
   border:none;
 }
 
-/* #btn-close-perso {
-  border: 2px solid white ;
-  border-radius: 50%;
-  font-size: 0.7rem;
-  color: white;
-  opacity:100;
-  margin-right: 15px;
-} */
+.input-group-text-perso {
+  border:none !important;
+  background-color: #e6e6e6 !important;
+}
 
 .btn-close-perso {
   color:white;
