@@ -1,5 +1,4 @@
-import { ingredientsClass } from '../index.js'
-import { selectRecipeWithFilterIngredient } from './recipeFilter.js'
+import { ingredientsClass, recipesArray } from '../index.js'
 
 /*
 * cliquer sur un ingrédient dans la liste afin de le sélectionner
@@ -67,16 +66,6 @@ export function listener () {
   //  selectIngredient()
 }
 
-// export function closeBtn () {
-//   const closeButtons = document.querySelectorAll('.btn-close-perso')
-//   // console.log('ok', closeButtons)
-//   closeButtons.forEach(closeButton => {
-//     closeButton.addEventListener('click', () => {
-
-//     })
-//   })
-// }
-
 function closeEvent (event) {
 // supprimer l'élément de la liste des filtres et des éléments sélectionnés
   // et le rajouter dans la liste des tags
@@ -88,4 +77,42 @@ function closeEvent (event) {
   ingredientsClass.selectedIngredients.delete(closeButton.parentNode.firstChild.textContent)
   // console.log('parent', closeButton.parentNode.parentNode, 'child', closeButton.parentNode)
   closeButton.parentNode.parentNode.removeChild(closeButton.parentNode)
+  selectRecipeWithFilterIngredient()
+}
+
+/* Fonction qui parcourt les recettes
+* et sélectionne celles qui contiennent les ingrédients filtrés */
+function selectRecipeWithFilterIngredient () {
+  // console.log('appel selectrecipe')
+  const recipesToDisplay = []
+  recipesArray.forEach(recipe => {
+    let recipeToDisplayBool = true
+    ingredientsClass.selectedIngredients.forEach(ingredient => {
+      const result = recipe.ingredientList.includes(ingredient)
+      if (!result) {
+        recipeToDisplayBool = false
+      }
+    })
+    if (recipeToDisplayBool === true) {
+      recipesToDisplay.push(recipe)
+    }
+  })
+  console.log(recipesToDisplay)
+  displayFilteredRecipes(recipesToDisplay)
+  return recipesToDisplay
+}
+
+/**
+ * Supprime les recettes et affiche seulement celles filtrées
+ */
+function displayFilteredRecipes (recipesToDisplay) {
+  const divRecipes = document.getElementsByClassName('recipes')[0]
+  divRecipes.innerHTML = ''
+  if (recipesToDisplay.length === 0) {
+    divRecipes.innerHTML = '<p> Aucune recette correspondante</p>'
+  } else {
+    recipesToDisplay.forEach(recipe => {
+      divRecipes.appendChild(recipe.recipeFactory())
+    })
+  }
 }

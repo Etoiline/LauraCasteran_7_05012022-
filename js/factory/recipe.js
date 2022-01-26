@@ -9,6 +9,7 @@ export default class Recipe {
     this.description = dataRecipe.description
     this.appliance = dataRecipe.appliance
     this.ustensils = dataRecipe.ustensils
+    this.ingredientList = []
   }
 
   /**
@@ -69,6 +70,7 @@ export default class Recipe {
       const pName = document.createElement('p')
       pName.setAttribute('class', 'nameIngredient')
       pName.textContent = item.ingredient
+      this.ingredientList.push(item.ingredient)
       liIngredient.appendChild(pName)
       if (item.quantity) {
         pName.textContent = item.ingredient + ':'

@@ -1,10 +1,9 @@
 import { recipes } from '../data/recipes.js'
-import Recipe from './factory/recipe.js'
 
+import Recipe from './factory/recipe.js'
 import Ingredients from './factory/ingredient.js'
 import Appliance from './factory/appliance.js'
 import Ustensil from './factory/ustensil.js'
-import { selectRecipeWithFilterIngredient } from './component/recipeFilter.js'
 
 console.table(recipes)
 
@@ -37,8 +36,3 @@ dropdownIngredients.addEventListener('hide.bs.dropdown', function () {
   searchInput.value = 'Rechercher un ingrédient'
   console.log('fermer dropdown ingredient')
 })
-
-// ingredientComponent.listener()
-
-const recipesToDisplay = selectRecipeWithFilterIngredient()
-console.log('recipe to display', recipesToDisplay)
