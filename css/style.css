@@ -36,6 +36,14 @@ body{
   width:600px;
 }
 
+.appliance-search-onclick {
+  width:200px;
+}
+
+.ustensil-search-onclick {
+  width:200px;
+}
+
 .btn-general li {
   margin:4px;
 }
@@ -190,6 +198,33 @@ input[type='text'] {
 }
 
 .search-tags__ingredients p {
+  margin:5px;
+  color:white;
+  margin-left:15px;
+}
+
+
+.search-tags__appliance > span{
+  background-color:#28a745;
+  align-items : center;
+  margin:5px;
+  border-radius: 6px;
+}
+
+.search-tags__appliance p {
+  margin:5px;
+  color:white;
+  margin-left:15px;
+}
+
+.search-tags__ustensil > span{
+  background-color:#dc3545;
+  align-items : center;
+  margin:5px;
+  border-radius: 6px;
+}
+
+.search-tags__ustensil p {
   margin:5px;
   color:white;
   margin-left:15px;

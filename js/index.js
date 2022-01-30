@@ -8,22 +8,25 @@ import Ustensil from './factory/ustensil.js'
 console.table(recipes)
 
 export const recipesArray = []
+export const displayedRecipes = []
 const divRecipes = document.getElementsByClassName('recipes')[0]
-
-recipes.forEach((item, index) => {
-  const recipeObject = new Recipe(item)
-  recipesArray.push(recipeObject)
-  divRecipes.appendChild(recipeObject.recipeFactory())
-})
 
 // initialisation des dropdowns
 export const ingredientsClass = new Ingredients()
 export const applianceClass = new Appliance()
 export const ustensilsClass = new Ustensil()
 
-// console.log('current', ingredientsClass.currentIngredients, ingredientsClass.allIngredients)
-// ingredientsClass.currentIngredients.clear()
-// console.log('current', ingredientsClass.currentIngredients, ingredientsClass.allIngredients)
+// initialisation des recettes et du tableau recettes affichées
+// initialisation des recettes filtrées selon les tags
+recipes.forEach((recipe, index) => {
+  const recipeObject = new Recipe(recipe)
+  recipesArray.push(recipeObject)
+  divRecipes.appendChild(recipeObject.recipeFactory())
+  displayedRecipes.push(recipeObject)
+  ingredientsClass.filteredRecipes.push(recipeObject)
+  applianceClass.filteredRecipes.push(recipeObject)
+  ustensilsClass.filteredRecipes.push(recipeObject)
+})
 
 const dropdownIngredients = document.getElementsByClassName('ingredient-search')[0]
 dropdownIngredients.addEventListener('show.bs.dropdown', function () {
@@ -34,5 +37,26 @@ dropdownIngredients.addEventListener('hide.bs.dropdown', function () {
   dropdownIngredients.setAttribute('class', 'btn-group ingredient-search')
   const searchInput = document.getElementsByClassName('ingredient-search__input')[0]
   searchInput.value = 'Rechercher un ingrédient'
-  console.log('fermer dropdown ingredient')
+})
+
+const dropdownAppliance = document.getElementsByClassName('appliance-search')[0]
+dropdownAppliance.addEventListener('show.bs.dropdown', function () {
+  dropdownAppliance.setAttribute('class', 'btn-group appliance-search appliance-search-onclick')
+  applianceClass.showAppliance()
+})
+dropdownAppliance.addEventListener('hide.bs.dropdown', function () {
+  dropdownAppliance.setAttribute('class', 'btn-group appliance-search')
+  const searchInput = document.getElementsByClassName('appliance-search__input')[0]
+  searchInput.value = 'Rechercher un appareil'
+})
+
+const dropdownUstensil = document.getElementsByClassName('ustensil-search')[0]
+dropdownUstensil.addEventListener('show.bs.dropdown', function () {
+  dropdownUstensil.setAttribute('class', 'btn-group ustensil-search ustensil-search-onclick')
+  ustensilsClass.showUstensil()
+})
+dropdownUstensil.addEventListener('hide.bs.dropdown', function () {
+  dropdownUstensil.setAttribute('class', 'btn-group ustensil-search')
+  const searchInput = document.getElementsByClassName('ustensil-search__input')[0]
+  searchInput.value = 'Rechercher un ustensile'
 })

@@ -1,11 +1,12 @@
 import { recipes } from '../../data/recipes.js'
-import * as ingredientSearch from '../component/ingredient-search.js'
+import * as ingredientSearch from '../component/ingredient-functions.js'
 /*
-* La classe ingrédients contient deux sets :
+* La classe ingrédients contient quatre sets :
 * allIngredients : contient l'ensemble des ingrédients récupérés dans toutes les recettes
 *                  cette variable sert à initialiser l'affichage et ne sera jamais modifiée
-* currentIngredients : contient les ingredients en tenant en compte les filtres choisis
+* currentIngredients : contient les ingredients en tenant en compte des filtres choisis
 *                   cette variable évoluera selon les recherches de l'utilisateur
+* selectedIngredients : contient l'ensemble des ingrédients sélectionnés
 */
 
 export default class Ingredients {
@@ -13,6 +14,7 @@ export default class Ingredients {
     this.allIngredients = new Set()
     this.currentIngredients = new Set()
     this.selectedIngredients = new Set()
+    this.filteredRecipes = []
     this.queryIngredients()
     this.initCurrentIngredients()
     this.initShowIngredients()
@@ -20,6 +22,7 @@ export default class Ingredients {
 
   /*
   * récupère et formatte la liste des ingrédients
+  * première lettre en majuscule et tri par ordre alphabétique
   */
   queryIngredients () {
     recipes.forEach(recipe => {
@@ -59,6 +62,9 @@ export default class Ingredients {
     ingredientSearch.listener()
   }
 
+  /*
+  * Affichage des ingrédients dans le dropdown selon les recherches
+  */
   showIngredients (ingredientList = this.currentIngredients) {
     // effacer le contenu pour le remplacer
     const ingredientItemToDelete = document.querySelectorAll('li.ingredient-item')

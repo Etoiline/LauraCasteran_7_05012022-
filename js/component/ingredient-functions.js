@@ -1,4 +1,5 @@
 import { ingredientsClass, recipesArray } from '../index.js'
+import { displayFilteredRecipes } from './utils.js'
 
 /*
 * cliquer sur un ingrédient dans la liste afin de le sélectionner
@@ -60,10 +61,7 @@ export function listener () {
       }
     })
     ingredientsClass.showIngredients(ingredientSearch)
-    // console.log('tab', ingredientsClass.currentIngredients)
-    // selectIngredient()
   })
-  //  selectIngredient()
 }
 
 function closeEvent (event) {
@@ -77,6 +75,7 @@ function closeEvent (event) {
   ingredientsClass.selectedIngredients.delete(closeButton.parentNode.firstChild.textContent)
   // console.log('parent', closeButton.parentNode.parentNode, 'child', closeButton.parentNode)
   closeButton.parentNode.parentNode.removeChild(closeButton.parentNode)
+  // ingredientsClass.filteredRecipes.push(selectRecipeWithFilterIngredient())
   selectRecipeWithFilterIngredient()
 }
 
@@ -85,6 +84,8 @@ function closeEvent (event) {
 function selectRecipeWithFilterIngredient () {
   // console.log('appel selectrecipe')
   const recipesToDisplay = []
+  ingredientsClass.filteredRecipes.splice(0, ingredientsClass.filteredRecipes.length)
+  // console.log('selectrecipe', displayedRecipes)
   recipesArray.forEach(recipe => {
     let recipeToDisplayBool = true
     ingredientsClass.selectedIngredients.forEach(ingredient => {
@@ -95,24 +96,23 @@ function selectRecipeWithFilterIngredient () {
     })
     if (recipeToDisplayBool === true) {
       recipesToDisplay.push(recipe)
+      ingredientsClass.filteredRecipes.push(recipe)
     }
   })
-  console.log(recipesToDisplay)
-  displayFilteredRecipes(recipesToDisplay)
-  return recipesToDisplay
+  displayFilteredRecipes()
 }
 
 /**
  * Supprime les recettes et affiche seulement celles filtrées
  */
-function displayFilteredRecipes (recipesToDisplay) {
-  const divRecipes = document.getElementsByClassName('recipes')[0]
-  divRecipes.innerHTML = ''
-  if (recipesToDisplay.length === 0) {
-    divRecipes.innerHTML = '<p> Aucune recette correspondante</p>'
-  } else {
-    recipesToDisplay.forEach(recipe => {
-      divRecipes.appendChild(recipe.recipeFactory())
-    })
-  }
-}
+// function displayFilteredRecipes (recipesToDisplay) {
+//   const divRecipes = document.getElementsByClassName('recipes')[0]
+//   divRecipes.innerHTML = ''
+//   if (recipesToDisplay.length === 0) {
+//     divRecipes.innerHTML = '<p> Aucune recette correspondante</p>'
+//   } else {
+//     recipesToDisplay.forEach(recipe => {
+//       divRecipes.appendChild(recipe.recipeFactory())
+//     })
+//   }
+// }

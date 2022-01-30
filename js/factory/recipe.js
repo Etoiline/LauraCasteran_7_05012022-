@@ -10,6 +10,8 @@ export default class Recipe {
     this.appliance = dataRecipe.appliance
     this.ustensils = dataRecipe.ustensils
     this.ingredientList = []
+    this.recipesToDisplay = []
+    this.displayedRecipe = [] // liste des recettes affichées
   }
 
   /**
@@ -61,6 +63,7 @@ export default class Recipe {
     return figure
   }
 
+  // Crée la partie ingrédients
   ingredientsFactory () {
     const ulIngredients = document.createElement('ul')
     ulIngredients.setAttribute('class', ' ingredients list-unstyled')
@@ -93,5 +96,20 @@ export default class Recipe {
     })
 
     return ulIngredients
+  }
+
+  /*
+  * Supprime les recettes et affiche seulement celles filtrées
+  */
+  displayFilteredRecipes () {
+    const divRecipes = document.getElementsByClassName('recipes')[0]
+    divRecipes.innerHTML = ''
+    if (this.recipesToDisplay.length === 0) {
+      divRecipes.innerHTML = '<p> Aucune recette correspondante</p>'
+    } else {
+      this.recipesToDisplay.forEach(recipe => {
+        divRecipes.appendChild(recipe.recipeFactory())
+      })
+    }
   }
 }
