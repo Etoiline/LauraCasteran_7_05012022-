@@ -6,6 +6,7 @@ export default class Ustensil {
     this.allUstensils = new Set()
     this.currentUstensils = new Set()
     this.selectedUstensils = new Set()
+    this.displayedUstensils = new Set()
     this.filteredRecipes = []
     this.queryUstensil()
     this.initCurrentUstensil()
@@ -31,6 +32,7 @@ export default class Ustensil {
   initCurrentUstensil () {
     this.allUstensils.forEach(ustensil => {
       this.currentUstensils.add(ustensil)
+      this.displayedUstensils.add(ustensil)
     })
   }
 
@@ -52,7 +54,7 @@ export default class Ustensil {
     ustensilSearch.listener()
   }
 
-  showUstensil (ustenilList = this.currentUstensils) {
+  showUstensil (ustenilList = this.displayedUstensils) {
     // effacer le contenu pour le remplacer
     const ustensilItemToDelete = document.querySelectorAll('li.ustensil-item')
     ustensilItemToDelete.forEach(ustensilDelete => {

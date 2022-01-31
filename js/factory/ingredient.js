@@ -14,6 +14,7 @@ export default class Ingredients {
     this.allIngredients = new Set()
     this.currentIngredients = new Set()
     this.selectedIngredients = new Set()
+    this.displayedIngredients = new Set()
     this.filteredRecipes = []
     this.queryIngredients()
     this.initCurrentIngredients()
@@ -41,6 +42,7 @@ export default class Ingredients {
   initCurrentIngredients () {
     this.allIngredients.forEach(ingredient => {
       this.currentIngredients.add(ingredient)
+      this.displayedIngredients.add(ingredient)
     })
   }
 
@@ -65,7 +67,7 @@ export default class Ingredients {
   /*
   * Affichage des ingrédients dans le dropdown selon les recherches
   */
-  showIngredients (ingredientList = this.currentIngredients) {
+  showIngredients (ingredientList = this.displayedIngredients) {
     // effacer le contenu pour le remplacer
     const ingredientItemToDelete = document.querySelectorAll('li.ingredient-item')
     ingredientItemToDelete.forEach(ingredientDelete => {

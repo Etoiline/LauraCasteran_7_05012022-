@@ -14,6 +14,7 @@ export default class Appliance {
     this.allAppliance = new Set()
     this.currentAppliance = new Set()
     this.selectedAppliance = new Set()
+    this.displayedAppliance = new Set()
     this.filteredRecipes = []
     this.queryAppliance()
     this.initCurrentAppliance()
@@ -38,6 +39,7 @@ export default class Appliance {
   initCurrentAppliance () {
     this.allAppliance.forEach(appliance => {
       this.currentAppliance.add(appliance)
+      this.displayedAppliance.add(appliance)
     })
   }
 
@@ -59,7 +61,7 @@ export default class Appliance {
     applianceSearch.listener()
   }
 
-  showAppliance (applianceList = this.currentAppliance) {
+  showAppliance (applianceList = this.displayedAppliance) {
     // effacer le contenu pour le remplacer
     const applianceItemToDelete = document.querySelectorAll('li.appliance-item')
     applianceItemToDelete.forEach(applianceDelete => {
