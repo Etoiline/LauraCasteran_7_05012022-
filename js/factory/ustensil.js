@@ -1,6 +1,17 @@
 import { recipes } from '../../data/recipes.js'
 import * as ustensilSearch from '../component/ustensil-functions.js'
 
+/*
+* La classe ustensil contient quatre sets :
+* allUstensils : contient l'ensemble des ustensiles récupérés dans toutes les recettes
+*                  cette variable sert à initialiser l'affichage et ne sera jamais modifiée
+* currentUstensils : contient les ustensiles en tenant en compte des filtres choisis
+*                   cette variable évoluera selon les recherches de l'utilisateur
+* selectedUstensils : contient l'ensemble des ustensiles sélectionnés
+* displayedUstensils : contient les ustensiles affichés dans le dropdown
+*                        selon les recettes affichées
+*/
+
 export default class Ustensil {
   constructor () {
     this.allUstensils = new Set()
@@ -15,6 +26,7 @@ export default class Ustensil {
 
   /*
   * récupère et formatte la liste des ustensiles
+  * première lettre en majuscule et tri par ordre alphabétique
   */
   queryUstensil () {
     recipes.forEach(recipe => {
@@ -26,7 +38,7 @@ export default class Ustensil {
   }
 
   /*
-  * initialise la liste currentUstensil à la même valeur que allUstensil
+  * initialise la liste currentUstensil et displayedUstensil à la même valeur que allUstensil
   * c'est au premier affichage de la page, aucune recherche n'a encore été effectuée
   */
   initCurrentUstensil () {
@@ -54,6 +66,9 @@ export default class Ustensil {
     ustensilSearch.listener()
   }
 
+  /*
+  * Affichage des ustensiles dans le dropdown selon les recherches et les recettes restantes
+  */
   showUstensil (ustenilList = this.displayedUstensils) {
     // effacer le contenu pour le remplacer
     const ustensilItemToDelete = document.querySelectorAll('li.ustensil-item')

@@ -1,12 +1,15 @@
 import { recipes } from '../../data/recipes.js'
 import * as applianceSearch from '../component/appliance-functions.js'
+
 /*
-* La classe appliance contient trois sets :
+* La classe appliance contient quatre sets :
 * allAppliance : contient l'ensemble des appareils récupérés dans toutes les recettes
 *                  cette variable sert à initialiser l'affichage et ne sera jamais modifiée
 * currentAppliance : contient les appareils en tenant en compte des filtres choisis
 *                   cette variable évoluera selon les recherches de l'utilisateur
 * selectedAppliance : contient l'ensemble des appareils sélectionnés
+* displayedAppliance : contient les appareils affichés dans le dropdown
+*                        selon les recettes affichées
 */
 
 export default class Appliance {
@@ -23,6 +26,7 @@ export default class Appliance {
 
   /*
   * récupère et formatte la liste des appareils
+  * première lettre en majuscule et tri par ordre alphabétique
   */
   queryAppliance () {
     recipes.forEach(recipe => {
@@ -33,7 +37,7 @@ export default class Appliance {
   }
 
   /*
-  * initialise la liste currentAppliance à la même valeur que allAppliance
+  * initialise la liste currentAppliance et displayedAppliance à la même valeur que allAppliance
   * c'est au premier affichage de la page, aucune recherche n'a encore été effectuée
   */
   initCurrentAppliance () {
@@ -61,13 +65,15 @@ export default class Appliance {
     applianceSearch.listener()
   }
 
+  /*
+  * Affichage des appareils dans le dropdown selon les recherches et les recettes restantes
+  */
   showAppliance (applianceList = this.displayedAppliance) {
     // effacer le contenu pour le remplacer
     const applianceItemToDelete = document.querySelectorAll('li.appliance-item')
     applianceItemToDelete.forEach(applianceDelete => {
       applianceDelete.remove()
     })
-    // console.log('querydelete', ingredientItemToDelete)
     const divApplianceSearch = document.getElementsByClassName('appliance-search')[0]
     const ulApplianceSearch = divApplianceSearch.getElementsByTagName('ul')[0]
     applianceList.forEach(appliance => {

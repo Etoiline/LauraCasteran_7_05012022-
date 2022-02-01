@@ -24,6 +24,10 @@ export function displayFilteredRecipes () {
   updateTags(ingrApplUstArray)
 }
 
+/*
+* Fonction qui met à jour les listes contenant les tags à afficher
+* en tenant compte des recettes affichées et des tags déjà sélectionnés
+*/
 function updateTags (ingrApplUstArray) {
 // 3 sets qui vont contenir les éléments à afficher dans les tags
   let ingredientDisplayed = new Set()

@@ -7,6 +7,8 @@ import * as ingredientSearch from '../component/ingredient-functions.js'
 * currentIngredients : contient les ingredients en tenant en compte des filtres choisis
 *                   cette variable évoluera selon les recherches de l'utilisateur
 * selectedIngredients : contient l'ensemble des ingrédients sélectionnés
+* displayedIngredients : contient les ingrédients affichés dans le dropdown
+*                        selon les recettes affichées
 */
 
 export default class Ingredients {
@@ -36,7 +38,7 @@ export default class Ingredients {
   }
 
   /*
-  * initialise la liste currentIngredients à la même valeur que allIngredients
+  * initialise la liste currentIngredients et displayedIngredients à la même valeur que allIngredients
   * c'est au premier affichage de la page, aucune recherche n'a encore été effectuée
   */
   initCurrentIngredients () {
@@ -65,7 +67,7 @@ export default class Ingredients {
   }
 
   /*
-  * Affichage des ingrédients dans le dropdown selon les recherches
+  * Affichage des ingrédients dans le dropdown selon les recherches et les recettes restantes
   */
   showIngredients (ingredientList = this.displayedIngredients) {
     // effacer le contenu pour le remplacer

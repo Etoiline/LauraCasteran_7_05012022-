@@ -19,11 +19,6 @@ export function selectAppliance () {
       const pTag = document.createElement('p')
       pTag.textContent = applianceItem.textContent
       spanTag.appendChild(pTag)
-      // const buttonTag = document.createElement('button')
-      // buttonTag.setAttribute('type', 'button')
-      // buttonTag.setAttribute('class', 'btn-close')
-      // buttonTag.setAttribute('id', 'btn-close-perso')
-      // buttonTag.setAttribute('aria-label', 'Close')
       const buttonTag = document.createElement('i')
       buttonTag.setAttribute('class', 'fas fa-times btn-close-perso')
       buttonTag.addEventListener('click', closeEvent)
@@ -56,15 +51,11 @@ export function listener () {
     applianceItems.forEach(applianceItem => applianceItem.remove())
     applianceClass.currentAppliance.forEach(appliance => {
       if (appliance.toLowerCase().match(searchInput.value.toLowerCase())) {
-        // ingredientsClass.currentIngredients.add(ingredient)
         applianceSearch.add(appliance)
       }
     })
     applianceClass.showAppliance(applianceSearch)
-    // console.log('tab', ingredientsClass.currentIngredients)
-    // selectIngredient()
   })
-  //  selectIngredient()
 }
 
 function closeEvent (event) {
@@ -102,18 +93,3 @@ function selectRecipeWithFilterAppliance () {
   })
   displayFilteredRecipes()
 }
-
-/**
- * Supprime les recettes et affiche seulement celles filtrées
- */
-// function displayFilteredRecipes (recipesToDisplay) {
-//   const divRecipes = document.getElementsByClassName('recipes')[0]
-//   divRecipes.innerHTML = ''
-//   if (recipesToDisplay.length === 0) {
-//     divRecipes.innerHTML = '<p> Aucune recette correspondante</p>'
-//   } else {
-//     recipesToDisplay.forEach(recipe => {
-//       divRecipes.appendChild(recipe.recipeFactory())
-//     })
-//   }
-// }

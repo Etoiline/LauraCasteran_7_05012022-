@@ -28,6 +28,7 @@ recipes.forEach((recipe, index) => {
   ustensilsClass.filteredRecipes.push(recipeObject)
 })
 
+// mise en place des dropdowns
 const dropdownIngredients = document.getElementsByClassName('ingredient-search')[0]
 dropdownIngredients.addEventListener('show.bs.dropdown', function () {
   dropdownIngredients.setAttribute('class', 'btn-group ingredient-search ingredient-search-onclick')

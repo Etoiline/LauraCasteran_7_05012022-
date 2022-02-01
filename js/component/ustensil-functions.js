@@ -95,18 +95,3 @@ function selectRecipeWithFilterUstensil () {
   })
   displayFilteredRecipes()
 }
-
-/**
- * Supprime les recettes et affiche seulement celles filtrées
- */
-// function displayFilteredRecipes (recipesToDisplay) {
-//   const divRecipes = document.getElementsByClassName('recipes')[0]
-//   divRecipes.innerHTML = ''
-//   if (recipesToDisplay.length === 0) {
-//     divRecipes.innerHTML = '<p> Aucune recette correspondante</p>'
-//   } else {
-//     recipesToDisplay.forEach(recipe => {
-//       divRecipes.appendChild(recipe.recipeFactory())
-//     })
-//   }
-// }
