@@ -31,7 +31,7 @@ export default class Ingredients {
     recipes.forEach(recipe => {
       recipe.ingredients.forEach(ingredient => {
         const oneIngredient = ingredient.ingredient
-        this.allIngredients.add(oneIngredient[0].toUpperCase() + oneIngredient.substring(1).toLowerCase())
+        this.allIngredients.add(oneIngredient.toLowerCase())
       })
     })
     this.allIngredients = Array.from(this.allIngredients).sort()
