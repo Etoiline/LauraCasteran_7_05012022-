@@ -41,7 +41,16 @@ body{
 }
 
 .ustensil-search-onclick {
-  width:200px;
+  width:400px;
+}
+
+.ustensil-search-onclick > ul {
+  display: flex !important;
+  flex-wrap: wrap;
+}
+
+.ustensil-item-search {
+  width:100%;
 }
 
 .btn-general li {
@@ -142,6 +151,10 @@ body{
 
 .ingredient-item {
   width:30%;
+}
+
+.ustensil-item {
+  width:46%;
 }
 
 .appliance-search ul {
