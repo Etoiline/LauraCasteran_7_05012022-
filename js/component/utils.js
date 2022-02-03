@@ -1,27 +1,43 @@
 import { ingredientsClass, applianceClass, ustensilsClass } from '../index.js'
 
 /**
- * Supprime les recettes et affiche seulement celles filtrées
+ * Sélectionne les recettes correspondant à tous les filtres
  */
-export function displayFilteredRecipes () {
-  const divRecipes = document.getElementsByClassName('recipes')[0]
-  divRecipes.innerHTML = ''
+function selectRecipes () {
   let ingredientApplianceArray = []
   let ingrApplUstArray = []
+  const recipeToDisplay = []
   ingredientApplianceArray = ingredientsClass.filteredRecipes.filter(recipe => applianceClass.filteredRecipes.includes(recipe))
   if (ingredientApplianceArray.length === 0) {
-    divRecipes.innerHTML = '<p> Aucune recette correspondante</p>'
+    return recipeToDisplay
   } else {
     ingrApplUstArray = ingredientApplianceArray.filter(recipe => ustensilsClass.filteredRecipes.includes(recipe))
     if (ingrApplUstArray.length === 0) {
-      divRecipes.innerHTML = '<p> Aucune recette correspondante</p>'
+      return recipeToDisplay
     } else {
       ingrApplUstArray.forEach(recipe => {
-        divRecipes.appendChild(recipe.recipeFactory())
+        recipeToDisplay.push(recipe)
       })
     }
   }
-  updateTags(ingrApplUstArray)
+  return recipeToDisplay
+}
+
+/**
+ * Supprime les recettes et affiche seulement celles filtrées
+ */
+export function displayFilteredRecipes (recipeToDisplay = selectRecipes()) {
+  const divRecipes = document.getElementsByClassName('recipes')[0]
+  divRecipes.innerHTML = ''
+  console.log('length', recipeToDisplay.length)
+  if (recipeToDisplay.length === 0) {
+    divRecipes.innerHTML = '<p> Aucune recette correspondante</p>'
+  } else {
+    recipeToDisplay.forEach(recipe => {
+      divRecipes.appendChild(recipe.recipeFactory())
+    })
+  }
+  updateTags(recipeToDisplay)
 }
 
 /*
@@ -36,9 +52,9 @@ function updateTags (ingrApplUstArray) {
   ingrApplUstArray.forEach(recipe => {
     // ingrédients
     recipe.ingredients.forEach(ingredient => {
-      const oneIngredient = ingredient.ingredient
+      const oneIngredient = ingredient.ingredient.toLowerCase()
       if (ingredientsClass.selectedIngredients.has(oneIngredient) === false) {
-        ingredientDisplayed.add(oneIngredient[0].toUpperCase() + oneIngredient.substring(1).toLowerCase())
+        ingredientDisplayed.add(oneIngredient.toLowerCase())
       }
     })
 
