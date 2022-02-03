@@ -19,8 +19,7 @@ export const applianceClass = new Appliance()
 export const ustensilsClass = new Ustensil()
 
 // initialisation de la recherche principale
-// eslint-disable-next-line no-unused-vars
-const mainSearchClass = new MainSearch()
+export const mainSearchClass = new MainSearch()
 
 // initialisation des recettes et du tableau recettes affichées
 // initialisation des recettes filtrées selon les tags

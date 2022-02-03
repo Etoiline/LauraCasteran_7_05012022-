@@ -1,4 +1,4 @@
-import { ingredientsClass, applianceClass, ustensilsClass } from '../index.js'
+import { ingredientsClass, applianceClass, ustensilsClass, mainSearchClass } from '../index.js'
 
 /**
  * Sélectionne les recettes correspondant à tous les filtres
@@ -6,6 +6,7 @@ import { ingredientsClass, applianceClass, ustensilsClass } from '../index.js'
 function selectRecipes () {
   let ingredientApplianceArray = []
   let ingrApplUstArray = []
+  let ingrApplUstMainArray = []
   const recipeToDisplay = []
   ingredientApplianceArray = ingredientsClass.filteredRecipes.filter(recipe => applianceClass.filteredRecipes.includes(recipe))
   if (ingredientApplianceArray.length === 0) {
@@ -15,9 +16,14 @@ function selectRecipes () {
     if (ingrApplUstArray.length === 0) {
       return recipeToDisplay
     } else {
-      ingrApplUstArray.forEach(recipe => {
-        recipeToDisplay.push(recipe)
-      })
+      ingrApplUstMainArray = ingrApplUstArray.filter(recipe => mainSearchClass.filteredRecipes.includes(recipe))
+      if (ingrApplUstMainArray.length === 0) {
+        return recipeToDisplay
+      } else {
+        ingrApplUstMainArray.forEach(recipe => {
+          recipeToDisplay.push(recipe)
+        })
+      }
     }
   }
   return recipeToDisplay
