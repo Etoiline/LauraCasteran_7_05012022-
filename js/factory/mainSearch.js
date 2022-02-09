@@ -16,6 +16,17 @@ export default class MainSearch {
     this.filteredRecipes = recipesArray
   }
 
+  /**
+   * Formatter une chaine de caractère :
+   *     - mettre toute la chaine en minuscule
+   *     - ôter les accents
+   */
+  formatString (chaine) {
+    chaine = chaine.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    chaine = chaine.toLowerCase()
+    return chaine
+  }
+
   /*
   * surveille les entrées de l'utlisateur
   * et recherche à partir de 3 caractères
@@ -26,20 +37,19 @@ export default class MainSearch {
     searchInput.addEventListener('input', () => {
       this.filteredRecipes = []
       if (searchInput.value.length >= 3) {
-        console.log('début de recherche')
-        let i = 0
-        for (i = 0; i < recipesArray.length; i++) {
-          if (recipesArray[i].name.includes(searchInput.value)) {
+        const keyword = this.formatString(searchInput.value)
+        // console.log('début de recherche')
+        for (const recipe of recipesArray) {
+          if (recipe.name.includes(keyword)) {
             // console.log(recipe.name)
-            this.filteredRecipes.push(recipesArray[i])
-          } else if (recipesArray[i].description.includes(searchInput.value)) {
+            this.filteredRecipes.push(recipe)
+          } else if (recipe.description.includes(keyword)) {
             // console.log(recipe.description)
-            this.filteredRecipes.push(recipesArray[i])
+            this.filteredRecipes.push(recipe)
           } else {
-            let j = 0
-            for (j = 0; j < recipesArray[i].ingredientList.length; j++) {
-              if (recipesArray[i].ingredientList[j].includes(searchInput.value)) {
-                this.filteredRecipes.push(recipesArray[i])
+            for (const ingredient of recipe.ingredientList) {
+              if (ingredient.includes(keyword)) {
+                this.filteredRecipes.push(recipe)
                 break
               }
             }
