@@ -18,6 +18,7 @@ export default class MainSearch {
 
   /*
   * surveille les entrées de l'utlisateur
+  * et recherche à partir de 3 caractères
   */
   listener () {
     const searchInput = document.getElementById('search')
@@ -28,7 +29,6 @@ export default class MainSearch {
         console.log('début de recherche')
         let i = 0
         for (i = 0; i < recipesArray.length; i++) {
-          
           if (recipesArray[i].name.includes(searchInput.value)) {
             // console.log(recipe.name)
             this.filteredRecipes.push(recipesArray[i])
@@ -40,6 +40,7 @@ export default class MainSearch {
             for (j = 0; j < recipesArray[i].ingredientList.length; j++) {
               if (recipesArray[i].ingredientList[j].includes(searchInput.value)) {
                 this.filteredRecipes.push(recipesArray[i])
+                break
               }
             }
           }
@@ -47,7 +48,7 @@ export default class MainSearch {
       } else {
         this.filteredRecipes = recipesArray.slice()
       }
-      displayFilteredRecipes(this.filteredRecipes)
+      displayFilteredRecipes()
     })
   }
 }
