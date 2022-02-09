@@ -16,6 +16,17 @@ export default class MainSearch {
     this.filteredRecipes = recipesArray
   }
 
+  /**
+   * Formatter une chaine de caractère :
+   *     - mettre toute la chaine en minuscule
+   *     - ôter les accents
+   */
+  formatString (chaine) {
+    chaine = chaine.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    chaine = chaine.toLowerCase()
+    return chaine
+  }
+
   /*
   * surveille les entrées de l'utlisateur
   */
@@ -25,20 +36,26 @@ export default class MainSearch {
     searchInput.addEventListener('input', () => {
       this.filteredRecipes = []
       if (searchInput.value.length >= 3) {
+        const keyword = this.formatString(searchInput.value)
         console.log('début de recherche')
         recipesArray.forEach(recipe => {
-          if (recipe.name.includes(searchInput.value)) {
+          const recipeName = this.formatString(recipe.name)
+          if (recipeName.includes(keyword)) {
             // console.log(recipe.name)
             this.filteredRecipes.push(recipe)
-          } else if (recipe.description.includes(searchInput.value)) {
-            // console.log(recipe.description)
-            this.filteredRecipes.push(recipe)
           } else {
-            recipe.ingredientList.forEach(ingredient => {
-              if (ingredient.includes(searchInput.value)) {
-                this.filteredRecipes.push(recipe)
-              }
-            })
+            const recipeDescription = this.formatString(recipe.description)
+            if (recipeDescription.includes(keyword)) {
+            // console.log(recipe.description)
+              this.filteredRecipes.push(recipe)
+            } else {
+              recipe.ingredientList.forEach(ingredient => {
+                const recipeIngredient = this.formatString(ingredient)
+                if (recipeIngredient.includes(keyword)) {
+                  this.filteredRecipes.push(recipe)
+                }
+              })
+            }
           }
         })
       } else {
