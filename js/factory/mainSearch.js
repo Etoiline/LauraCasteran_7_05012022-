@@ -44,7 +44,7 @@ export default class MainSearch {
       } else {
         this.filteredRecipes = recipesArray.slice()
       }
-      displayFilteredRecipes(this.filteredRecipes)
+      displayFilteredRecipes()
     })
   }
 }
