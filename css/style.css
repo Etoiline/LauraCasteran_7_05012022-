@@ -242,3 +242,12 @@ input[type='text'] {
   color:white;
   margin-left:15px;
 }
+
+.dropdown-perso::after{
+  border: solid white !important;
+  border-width: 0 3px 3px 0 !important;
+  display: inline-block !important;
+  padding: 3px;
+  transform: rotate(45deg) !important;
+  -webkit-transform: rotate(45deg) !important;
+}
