@@ -40,17 +40,21 @@ export default class MainSearch {
         const keyword = this.formatString(searchInput.value)
         // console.log('début de recherche')
         for (const recipe of recipesArray) {
-          if (recipe.name.includes(keyword)) {
+          const recipeName = this.formatString(recipe.name)
+          if (recipeName.includes(keyword)) {
             // console.log(recipe.name)
             this.filteredRecipes.push(recipe)
-          } else if (recipe.description.includes(keyword)) {
-            // console.log(recipe.description)
-            this.filteredRecipes.push(recipe)
           } else {
-            for (const ingredient of recipe.ingredientList) {
-              if (ingredient.includes(keyword)) {
-                this.filteredRecipes.push(recipe)
-                break
+            const recipeDescription = this.formatString(recipe.description)
+            if (recipeDescription.includes(keyword)) {
+            // console.log(recipe.description)
+              this.filteredRecipes.push(recipe)
+            } else {
+              for (const ingredient of recipe.ingredientList) {
+                if (this.formatString(ingredient).includes(keyword)) {
+                  this.filteredRecipes.push(recipe)
+                  break
+                }
               }
             }
           }
